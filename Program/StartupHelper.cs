@@ -8,7 +8,7 @@ public class StartupHelper
 
     public static void EnableAutoStart()
     {
-        string exePath = Assembly.GetExecutingAssembly().Location;
+        string exePath = Assembly.GetExecutingAssembly().Location + " --startup";
 
         using (RegistryKey key = Registry.CurrentUser.OpenSubKey(StartupKeyPath, writable: true))
         {

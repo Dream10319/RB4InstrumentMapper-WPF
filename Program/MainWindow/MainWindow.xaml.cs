@@ -54,6 +54,11 @@ namespace RB4InstrumentMapper
 
             // Capture Dispatcher object for use in callbacks
             uiDispatcher = Dispatcher;
+
+            if(Properties.Settings.Default.IsAutoStartEnabled)
+            {
+                this.WindowState = WindowState.Minimized;
+            }
         }
 
         /// <summary>
@@ -147,6 +152,10 @@ namespace RB4InstrumentMapper
         /// </summary>
         private void Window_Closed(object sender, EventArgs e)
         {
+
+            Properties.Settings.Default.IsAutoStartEnabled = false;
+            Properties.Settings.Default.Save();
+
             // Shut down
             if (packetCaptureActive)
             {

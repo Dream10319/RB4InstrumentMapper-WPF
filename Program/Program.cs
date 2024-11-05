@@ -14,6 +14,7 @@ namespace RB4InstrumentMapper
         private const string WinUsbOption = "--winusb";
         private const string RevertOption = "--revert";
         private const string ReplayOption = "--replay";
+        private const string StartMode = "--startup";
 
         [STAThread]
         public static int Main(string[] args)
@@ -26,6 +27,13 @@ namespace RB4InstrumentMapper
                 App.Main();
                 return 0;
             }
+            else if(args[0] == StartMode)
+            {
+                Properties.Settings.Default.IsAutoStartEnabled = true;
+                Properties.Settings.Default.Save();
+                App.Main();
+                return 0;
+            }
             else if (args.Length < 2)
             {
                 Console.WriteLine("Not enough arguments!");
@@ -34,6 +42,7 @@ namespace RB4InstrumentMapper
 
             string type = args[0];
             string path = args[1];
+                
             int exitCode;
             switch (type)
             {
